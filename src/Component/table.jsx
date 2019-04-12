@@ -1,13 +1,14 @@
 import React from "react";
 function Table(props) {
   var showdata = ()=> {
-    var data = props.value;
-    return data.map(value => {
+    console.log(props.value)
+    var data = props.value||[];
+    return data.map((value,index) => {
       return (
-        <tr key={value.id}>
-          {/* <th scope="row">{value.id}</th> */}
-          <td>{value.tittle}</td>
+        <tr key={index}>
+          <td>{value.title}</td>
           <td>{value.price}</td>
+          <td><button className="btn btn-danger" onClick={()=>props.onDelete(value._id)}>Delete</button></td>
         </tr>
       );
     });
@@ -18,9 +19,10 @@ function Table(props) {
       <table className="table">
         <thead className="thead-dark">
           <tr>
-            {/* <th scope="col">id</th> */}
-            <th scope="col">Tittle</th>
+            <th scope="col">title</th>
             <th scope="col">Price</th>
+            <th scope="col"></th>
+
           </tr>
         </thead>
         <tbody>{showdata()}</tbody>

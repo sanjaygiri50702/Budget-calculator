@@ -3,14 +3,14 @@ class Incomeform extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tittle: "",
+      title: "",
       price: "",
       type:"income"
     };
   }
   handleExpenses(event){
       this.setState({
-            tittle:event.target.value
+            title:event.target.value
       })
   }
   handlePrice(event){
@@ -20,26 +20,21 @@ class Incomeform extends Component {
   }
   handleSubmit(event){
       event.preventDefault();
-      // console.log("eve",event)
       var data ={
-          id: Date.now(),
-          tittle:this.state.tittle,
-          price:this.state.price,
-          type:this.state.type
+          title:this.state.title,
+          price:this.state.price
       }
       if(!isNaN(this.state.price)){
-        this.props.onSubmit(data)
+        this.props.onSubmit(data,this.state.type)
       }
       else{
         alert("price is not a number");
       }
-
+     
       this.setState(state=>({
-        // id:state.id + 1,
-        tittle: "",
+        title: "",
         price: ""
       }))
-  // console.log('hss',data);
       
   }
   handleType(){
@@ -47,17 +42,15 @@ class Incomeform extends Component {
           type: state.type=="income" ? "expenses":"income"
 
   }))
-  // console.log('hss',this.state.type)
 }
 
   render() {
-    // console.log('id',this.state.id)
     return (
       <div className="mt-5">
         <form action="" onSubmit={this.handleSubmit.bind(this)}>
           <div className="form-group">
             <label>Title</label>
-            <input className="form-control" type="text" name="income" value={this.state.tittle} onChange={this.handleExpenses.bind(this)}/>
+            <input className="form-control" type="text" name="income" value={this.state.title} onChange={this.handleExpenses.bind(this)}/>
           </div>
           <div>
             <label>Price</label>
